@@ -59,13 +59,13 @@ exports.getAbsoluteMaxRAM = function(ram){
     return Math.floor((mem-(gT16 > 0 ? (Number.parseInt(gT16/8) + (16*1073741824)/4) : mem/4))/1073741824)
 }
 
-function resolveSelectedRAM(ram) {
-    if(ram?.recommended != null) {
-        return `${ram.recommended}M`
+function resolveSelectedRAM(ram= { recommended: 8192 }) {
+    if (ram.recommended != null) {
+        return `${ram.recommended}M`; // Devuelve el valor recomendado en MB
     } else {
         // Legacy behavior
-        const mem = os.totalmem()
-        return mem >= (8*1073741824) ? '4G' : (mem >= (6*1073741824) ? '3G' : '2G')
+        const mem = os.totalmem();
+        return mem >= (8 * 1073741824) ? '4G' : (mem >= (6 * 1073741824) ? '3G' : '2G');
     }
 }
 
